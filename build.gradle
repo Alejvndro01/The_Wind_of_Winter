@@ -4,7 +4,7 @@ plugins {
 }
 
 version = project.version
-group = project.maven_group
+group = project.group
 
 repositories {
 	mavenCentral()
@@ -36,13 +36,4 @@ java {
 	withSourcesJar()
 	sourceCompatibility = JavaVersion.VERSION_25
 	targetCompatibility = JavaVersion.VERSION_25
-}
-
-jar {
-	def projectName = project.name
-	inputs.property "projectName", projectName
-
-	from("LICENSE") {
-		rename { "${it}_$projectName"}
-	}
 }
