@@ -1,15 +1,15 @@
-{
+﻿{
 	"schemaVersion": 1,
 	"id": "the-winds-of-winter",
 	"version": "${version}",
 	"name": "The Winds of Winter",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Choose your character. Live their legacy. A Minecraft character mod inspired by the universe of Game of Thrones.",
 	"authors": [
-		"Me!"
+		"Alejvndro Dev"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/Alejvndro01/The_Wind_of_Winter",
+		"sources": "https://github.com/Alejvndro01/The_Wind_of_Winter"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/the-winds-of-winter/icon.png",
@@ -17,6 +17,9 @@
 	"entrypoints": {
 		"main": [
 			"com.thewindsofwinter.TheWindsOfWinter"
+		],
+		"client": [
+			"com.thewindsofwinter.client.TheWindsOfWinterClient"
 		],
 		"fabric-datagen": [
 			"com.thewindsofwinter.TheWindsOfWinterDataGenerator"
