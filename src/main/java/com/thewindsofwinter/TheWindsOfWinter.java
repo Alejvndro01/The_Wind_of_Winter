@@ -1,24 +1,23 @@
 package com.thewindsofwinter;
 
+import com.thewindsofwinter.network.CharacterSelectPayload;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.resources.Identifier;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.text.Text;
 
 public class TheWindsOfWinter implements ModInitializer {
-	public static final String MOD_ID = "the-winds-of-winter";
-
-	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-
 	@Override
 	public void onInitialize() {
-		LOGGER.info("Initializing The Winds of Winter Mod...");
+		// 1. Registramos el tipo de paquete en el servidor
+		PayloadTypeRegistry.playC2S().register(CharacterSelectPayload.ID, CharacterSelectPayload.CODEC);
 
-		// Lanzamos la inicialización del núcleo del mod
-		com.thewindsofwinter.core.ModCore.init();
-	}
-
-	public static Identifier id(String path) {
-		return Identifier.fromNamespaceAndPath(MOD_ID, path);
+		// 2. Definimos qué ocurre cuando el servidor recibe la elección del cliente
+		ServerPlayNetworking.registerGlobalReceiver(CharacterSelectPayload.ID, (payload, context) -> {
+			context.server().execute(() -> {
+				// Aquí entregaremos el inventario más adelante. Por ahora, confirmamos en el chat:
+				context.player().sendMessage(Text.literal("§6[The Winds of Winter] §fHas asumido el legado de: §b" + payload.characterId()), false);
+			});
+		});
 	}
 }
